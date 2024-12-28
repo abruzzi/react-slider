@@ -12,8 +12,12 @@ export const Slider = ({min = 0, value = 50, max = 100, width = 200}: {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [isDragging, setDragging] = useState(false);
-  const [position, setPosition] = useState(0);
+  const [position, setPosition] = useState(() => {
+    const range = (max - min);
+    return (value / range) * width;
+  });
 
+  const ratio = (max - min) / width;
   const onPointerDown = (e) => {
     setDragging(true);
     e.target.setPointerCapture(e.pointerId);
@@ -31,12 +35,12 @@ export const Slider = ({min = 0, value = 50, max = 100, width = 200}: {
     const boundingRect = containerRef.current.getBoundingClientRect();
     const containerX = boundingRect.x;
 
-    const pos = e.clientX - containerX;
+    const pos = Math.round(e.clientX - containerX);
 
     if (pos <= 0) {
       setPosition(0);
-    } else if (pos >= (width - HANDLE_WIDTH)) {
-      setPosition(width - HANDLE_WIDTH);
+    } else if (pos >= width) {
+      setPosition(width);
     } else {
       setPosition(pos);
     }
@@ -49,13 +53,13 @@ export const Slider = ({min = 0, value = 50, max = 100, width = 200}: {
 
   return (
     <>
-      {position}
+      <span className="label">{Math.round(position * ratio)}</span>
       <div className="container"
            ref={containerRef}
-           style={{width: `${width}px`}}
+           style={{width: `${width + HANDLE_WIDTH}px`}}
       >
         <div className="track"/>
-        <div className="activeTrack" style={{width: `${position + 12}px`}}/>
+        <div className="activeTrack" style={{width: `${position + HANDLE_WIDTH}px`}}/>
         <div className="handle"
              onPointerMove={onPointerMove}
              onPointerDown={onPointerDown}

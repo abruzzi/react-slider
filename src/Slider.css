@@ -20,10 +20,18 @@
 .handle {
   width: 20px;
   height: 20px;
-  background-color: #646cff;
+  background-color: deeppink;
   border-radius: 10px;
   position: absolute;
 
   top: -6px;
   cursor: pointer;
+}
+
+.label {
+  width: 32px;
+  background-color: white;
+  color: #333;
+  border-radius: 6px;
+  padding: 2px;
 }
