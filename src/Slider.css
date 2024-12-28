@@ -1,0 +1,29 @@
+.container {
+  width: 200px;
+  position: relative;
+}
+
+.track {
+  height: 8px;
+  background-color: #efefef;
+  border-radius: 6px;
+}
+
+.activeTrack {
+  height: 8px;
+  position: absolute;
+  top: 0;
+  background-color: #999;
+  border-radius: 6px;
+}
+
+.handle {
+  width: 20px;
+  height: 20px;
+  background-color: #646cff;
+  border-radius: 10px;
+  position: absolute;
+
+  top: -6px;
+  cursor: pointer;
+}

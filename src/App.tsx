@@ -1,7 +1,8 @@
 import './App.css'
+import {Slider} from "./Slider.tsx";
 
 function App() {
-  return <div>Hello world</div>
+  return <Slider />
 }
 
 export default App
